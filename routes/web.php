@@ -78,13 +78,13 @@ Route::middleware('auth')->group(function () {
 
     // Rute untuk admin
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/kritik/admin', [KritikController::class, 'indexAdmin'])->name('pages.kritik.index.admin');
+        Route::get('/kritik/admin', [KritikController::class, 'indexAdmin'])->name('pages.kritik.indexAdmin');
         Route::get('/champs', [ChampsController::class, 'indexAdminChamps'])->name('pages.champs.indexAdmin');
     });
 
     // Rute untuk user
     Route::middleware(['role:user'])->group(function () {
-        Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.index.user');
+        Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
     });
 });

@@ -67,9 +67,42 @@
                             <table class="table table-striped table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
-                                        <th>Tanggal</th>
-                                        <th>Rating</th>
+                                        <th>
+                                            <a href="{{ route('pages.kritik.indexUser', ['sort' => 'user_id', 'direction' => $sortField === 'user_id' && $sortDirection === 'asc' ? 'desc' : 'asc']) }}">
+                                                Nama 
+                                                @if ($sortField === 'user_id')
+                                                    @if ($sortDirection === 'asc')
+                                                        ▲
+                                                    @else
+                                                        ▼
+                                                    @endif
+                                                @endif
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="{{ route('pages.kritik.indexUser', ['sort' => 'date', 'direction' => $sortField === 'date' && $sortDirection === 'asc' ? 'desc' : 'asc']) }}">
+                                                Tanggal 
+                                                @if ($sortField === 'date')
+                                                    @if ($sortDirection === 'asc')
+                                                        ▲
+                                                    @else
+                                                        ▼
+                                                    @endif
+                                                @endif
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a href="{{ route('pages.kritik.indexUser', ['sort' => 'rating', 'direction' => $sortField === 'rating' && $sortDirection === 'asc' ? 'desc' : 'asc']) }}">
+                                                Rating 
+                                                @if ($sortField === 'rating')
+                                                    @if ($sortDirection === 'asc')
+                                                        ▲
+                                                    @else
+                                                        ▼
+                                                    @endif
+                                                @endif
+                                            </a>
+                                        </th>
                                         <th>Komentar</th>
                                     </tr>
                                 </thead>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kritik;
+use App\Models\User; // Tambahkan ini untuk mengakses model User
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,26 +23,41 @@ class KritikController extends Controller
         ]);
 
         Kritik::create([
-            'user_id' => Auth::id(),  
+            'user_id' => Auth::id(),
             'date' => $request->input('date'),
             'comment' => $request->input('comment'),
             'rating' => $request->input('rating'),
         ]);
 
-        return redirect()->route('pages.kritik.index.user')->with('success', 'Kritik dan saran telah dikirim.');
+        return redirect()->route('pages.kritik.indexUser')->with('success', 'Kritik dan saran telah dikirim.');
     }
 
-    public function indexAdmin()
+    public function indexAdmin(Request $request)
     {
+        $sortField = $request->input('sort', 'date');
+        $sortDirection = $request->input('direction', 'asc');
 
-        $kritik = Kritik::with('user')->paginate(10); 
-        return view('pages.kritikdansaran.indexAdmin', compact('kritik'));
+        $kritik = Kritik::with('user')
+            ->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->appends(['sort' => $sortField, 'direction' => $sortDirection]);
+
+        $users = User::all(); // Ambil data users
+
+        return view('pages.kritikdansaran.indexAdmin', compact('kritik', 'users', 'sortField', 'sortDirection'));
     }
-    
-    
-    public function indexUser()
+
+    public function indexUser(Request $request)
     {
-        $kritik = Kritik::where('user_id', Auth::id())->get();
-        return view('pages.kritikdansaran.indexUser', compact('kritik'));
+        $sortField = $request->input('sort', 'date');
+        $sortDirection = $request->input('direction', 'asc');
+
+        $kritik = Kritik::where('user_id', Auth::id())
+            ->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->appends(['sort' => $sortField, 'direction' => $sortDirection]);
+
+        return view('pages.kritikdansaran.indexUser', compact('kritik', 'sortField', 'sortDirection'));
     }
 }
+

@@ -7,17 +7,36 @@ use Illuminate\Http\Request;
 
 class ChampsController extends Controller
 {
+    public function indexAdminChamps(Request $request)
+    {
+       
+        $sortField = $request->input('sort', 'date'); 
+        $sortDirection = $request->input('direction', 'asc'); 
 
-    public function indexAdminChamps()
-    {
-        $champs = Champs::with('user')->get(); 
-        $users = User::all(); 
-        return view('pages.champs.indexAdmin', compact('champs', 'users'));
+
+        $champs = Champs::with('user')
+            ->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->appends(['sort' => $sortField, 'direction' => $sortDirection]);
+
+        $users = User::all();
+
+        return view('pages.champs.indexAdmin', compact('champs', 'users', 'sortField', 'sortDirection'));
     }
-    public function indexUserChamps()
+
+    public function indexUserChamps(Request $request)
     {
-        $champs = Champs::with('user')->paginate(10); 
-        return view('pages.champs.indexUser', compact('champs'));
+
+        $sortField = $request->input('sort', 'date'); 
+        $sortDirection = $request->input('direction', 'asc'); 
+
+
+        $champs = Champs::with('user')
+            ->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->appends(['sort' => $sortField, 'direction' => $sortDirection]);
+
+        return view('pages.champs.indexUser', compact('champs', 'sortField', 'sortDirection'));
     }
 
     public function create()
@@ -34,14 +53,13 @@ class ChampsController extends Controller
             'weight' => 'required|numeric|min:0',
         ]);
 
-        // Logic to store the winner details
         Champs::create([
             'user_id' => $request->input('user_id'),
             'date' => $request->input('date'),
             'weight' => $request->input('weight'),
         ]);
 
-        return redirect()->route('pages.champs.indexAdmin')->with('success', 'Winner has been selected successfully.');
+        return redirect()->route('pages.champs.indexAdminChamps')->with('success', 'Winner has been selected successfully.');
     }
 }
 
