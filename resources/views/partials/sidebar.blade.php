@@ -46,6 +46,18 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#schedule" aria-expanded="false" aria-controls="schedule">
+                <i class="icon-bar-graph menu-icon"></i>
+                <span class="menu-title">Schedule</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="schedule">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="/schedule/admin">Schedule</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#kritik" aria-expanded="false" aria-controls="kritik">
                 <i class="mdi mdi-comment-processing-outline menu-icon"></i>
                 <span class="menu-title">Kritik dan Saran</span>

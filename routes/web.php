@@ -3,6 +3,8 @@
 use App\Http\Controllers\ChampsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KritikController;
+use App\Http\Controllers\ScheduleController;
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,16 +78,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/champs/create', [ChampsController::class, 'create'])->name('pages.champs.create');
     Route::post('/champs/store', [ChampsController::class, 'store'])->name('pages.champs.store');
 
-    // Rute untuk admin
+    //Rute schedule
+    Route::get('create', [ScheduleController::class, 'create'])->name('pages.schedule.create');
+    Route::post('store', [ScheduleController::class, 'store'])->name('pages.schedule.store');
+    Route::get('{schedule}/edit', [ScheduleController::class, 'edit'])->name('pages.schedule.edit');
+    Route::put('{schedule}', [ScheduleController::class, 'update'])->name('pages.schedule.update');
+    Route::delete('{schedule}', [ScheduleController::class, 'destroy'])->name('pages.schedule.destroy');
+
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/kritik/admin', [KritikController::class, 'indexAdmin'])->name('pages.kritik.indexAdmin');
         Route::get('/champs', [ChampsController::class, 'indexAdminChamps'])->name('pages.champs.indexAdmin');
+        Route::get('/schedule/admin', [ScheduleController::class, 'indexAdmin'])->name('pages.schedule.indexAdmin');
     });
+
 
     // Rute untuk user
     Route::middleware(['role:user'])->group(function () {
         Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
+        Route::get('/schedule/user', [ScheduleController::class, 'indexUserSchedule'])->name('pages.schedule.indexUser');
     });
 });
 
