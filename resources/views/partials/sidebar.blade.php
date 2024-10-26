@@ -53,7 +53,11 @@
             </a>
             <div class="collapse" id="schedule">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="/schedule/admin">Schedule</a></li>
+                    @if (Auth::check() && Auth::user()->role === 'admin')
+                        <li class="nav-item"><a class="nav-link" href="/schedule/admin">Kritik dan Saran</a></li>
+                    @else
+                        <li class="nav-item"><a class="nav-link" href="/schedule/user">Kritik dan Saran</a></li>
+                    @endif
                 </ul>
             </div>
         </li>

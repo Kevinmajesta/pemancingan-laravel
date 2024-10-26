@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KritikController;
 use App\Http\Controllers\ScheduleController;
 use App\Models\Schedule;
+use App\Http\Controllers\ScheduleDetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,6 +71,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+
+    // Route to show the schedule details and registration form
+    Route::get('/schedule/{id_schedule}/details', [ScheduleDetailController::class, 'index'])->name('pages.schedule.daftarschedule.indexUser');
+
+    // Route to handle registration submission
+    Route::post('/schedule/register', [ScheduleDetailController::class, 'store'])->name('schedule_detail.store');
+
+
     // Rute kritik
     Route::get('/kritik/create', [KritikController::class, 'create'])->name('pages.kritikdansaran.create');
     Route::post('/kritik/store', [KritikController::class, 'store'])->name('pages.kritikdansaran.store');
@@ -96,7 +106,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:user'])->group(function () {
         Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
-        Route::get('/schedule/user', [ScheduleController::class, 'indexUserSchedule'])->name('pages.schedule.indexUser');
+        Route::get('/schedule/user', [ScheduleController::class, 'indexUser'])->name('pages.schedule.indexUser');
     });
 });
 

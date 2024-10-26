@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\User;
+use App\Models\ScheduleDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
+    // Display schedules for admin
     public function indexAdmin(Request $request)
     {
         $sortField = $request->input('sort', 'activity_name');
@@ -16,37 +21,65 @@ class ScheduleController extends Controller
         return view('pages.schedule.indexAdmin', compact('schedules', 'sortField', 'sortDirection'));
     }
 
+
     public function indexUser(Request $request)
     {
         $sortField = $request->input('sort', 'activity_name');
         $sortDirection = $request->input('direction', 'asc');
 
-        $schedules = Schedule::orderBy($sortField, $sortDirection)->paginate(10);
-        return view('pages.schedule.indexUser', compact('schedules', 'sortField', 'sortDirection'));
+        $schedules = Schedule::withCount('scheduleDetails')
+            ->orderBy($sortField, $sortDirection)
+            ->paginate(10);
+
+        foreach ($schedules as $schedule) {
+            $startTime = Carbon::parse("{$schedule->date} {$schedule->time}");
+            $remainingMinutes = now()->diffInMinutes($startTime, false);
+
+            // Tentukan format waktu dengan satuan atau "Sudah Selesai" jika negatif
+            if ($remainingMinutes < 0) {
+                $schedule->hours_remaining = "Sudah Selesai";
+            } elseif ($remainingMinutes >= 60) {
+                $remainingHours = floor($remainingMinutes / 60);
+                $schedule->hours_remaining = $remainingHours . ' jam lagi';
+            } else {
+                $schedule->hours_remaining = $remainingMinutes . ' menit lagi';
+            }
+        }
+
+        return view('pages.schedule.indexUser', [
+            'schedules' => $schedules,
+            'sortField' => $sortField,
+            'sortDirection' => $sortDirection,
+        ]);
     }
 
+
+
+    // Show the form for creating a new schedule
     public function create()
     {
         return view('pages.schedules.create');
     }
 
+    // Store a newly created schedule
     public function store(Request $request)
     {
         $request->validate([
             'activity_name' => 'required|string|max:255',
             'date' => 'required|date',
             'time' => 'required',
+            'maxqty' => 'required|integer',
         ]);
 
         Schedule::create([
             'activity_name' => $request->activity_name,
             'date' => $request->date,
             'time' => $request->time,
+            'maxqty' => $request->maxqty,
         ]);
 
         return redirect()->route('pages.schedule.indexAdmin')->with('success', 'Jadwal berhasil ditambahkan');
     }
-
 
     // Display the specified schedule
     public function show(Schedule $schedule)
@@ -57,25 +90,27 @@ class ScheduleController extends Controller
     // Show the form for editing the specified schedule
     public function edit(Schedule $schedule)
     {
-        return view('pages.schedules.edit', compact('schedule'));
+        return view('pages.schedule.editschedule.indexAdmin', compact('schedule'));
     }
 
-    // Update the specified schedule in storage
+    // Update the specified schedule
     public function update(Request $request, Schedule $schedule)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'activity_name' => 'required|string|max:255',
             'date' => 'required|date',
+            'time' => 'required',
+            'maxqty' => 'required|integer',
         ]);
 
         $schedule->update($request->all());
-        return redirect()->route('pages.schedules.indexAdmin')->with('success', 'Schedule updated successfully.');
+        return redirect()->route('pages.schedule.indexAdmin')->with('success', 'Schedule updated successfully.');
     }
 
-    // Remove the specified schedule from storage
+    // Remove the specified schedule
     public function destroy(Schedule $schedule)
     {
         $schedule->delete();
-        return redirect()->route('pages.schedules.indexAdmin')->with('success', 'Schedule deleted successfully.');
+        return redirect()->route('pages.schedule.indexAdmin')->with('success', 'Schedule deleted successfully.');
     }
 }

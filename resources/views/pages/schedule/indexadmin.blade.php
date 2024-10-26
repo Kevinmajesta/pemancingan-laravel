@@ -21,6 +21,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="maxqty">Max Qty</label>
+                                <input type="number" name="maxqty" id="maxqty" class="form-control" required>
+                                @error('maxqty')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="date">Tanggal</label>
                                 <input type="date" name="date" id="date" class="form-control" required>
                                 @error('date')
@@ -90,6 +97,7 @@
                                             <td>{{ $schedule->activity_name }}</td>
                                             <td>{{ $schedule->date }}</td>
                                             <td>{{ $schedule->time }}</td>
+                                            <td>{{ $schedule->maxqty }}</td>
                                             <td>
                                                 <a href="{{ route('pages.schedule.edit', $schedule->id_schedule) }}"
                                                     class="btn btn-sm btn-warning">Edit</a>

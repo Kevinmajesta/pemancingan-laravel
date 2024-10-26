@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('activity_name');
             $table->date('date');
             $table->time('time'); 
+            $table->integer('maxqty');
             $table->timestamps();
         });
     }
