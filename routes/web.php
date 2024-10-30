@@ -6,6 +6,7 @@ use App\Http\Controllers\KritikController;
 use App\Http\Controllers\ScheduleController;
 use App\Models\Schedule;
 use App\Http\Controllers\ScheduleDetailController;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,7 +108,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
         Route::get('/schedule/user', [ScheduleController::class, 'indexUser'])->name('pages.schedule.indexUser');
+        Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
     });
+
+
+    Route::resource('games', GameController::class);
 });
 
 require __DIR__ . '/auth.php';

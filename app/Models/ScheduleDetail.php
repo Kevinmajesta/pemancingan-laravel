@@ -18,13 +18,18 @@ class ScheduleDetail extends Model
         'id_user',
     ];
 
-    public function user()
+    public function game()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasOne(Game::class, 'id_schedule_detail', 'id_schedule_detail');
     }
 
     public function schedule()
     {
         return $this->belongsTo(Schedule::class, 'id_schedule');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

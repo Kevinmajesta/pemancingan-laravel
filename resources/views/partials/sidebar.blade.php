@@ -34,6 +34,24 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#schedule" aria-expanded="false" aria-controls="schedule">
+                <i class="mdi mdi-table-large menu-icon"></i>
+                <span class="menu-title">Schedule</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="schedule">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/schedule/admin' : '/schedule/user' }}">
+                            Schedule
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="icon-bar-graph menu-icon"></i>
                 <span class="menu-title">Charts</span>
@@ -44,23 +62,8 @@
                     <li class="nav-item"><a class="nav-link" href="/chart">ChartJs</a></li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#schedule" aria-expanded="false" aria-controls="schedule">
-                <i class="icon-bar-graph menu-icon"></i>
-                <span class="menu-title">Schedule</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="schedule">
-                <ul class="nav flex-column sub-menu">
-                    @if (Auth::check() && Auth::user()->role === 'admin')
-                        <li class="nav-item"><a class="nav-link" href="/schedule/admin">Kritik dan Saran</a></li>
-                    @else
-                        <li class="nav-item"><a class="nav-link" href="/schedule/user">Kritik dan Saran</a></li>
-                    @endif
-                </ul>
-            </div>
-        </li>
+        </li> --}}
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#kritik" aria-expanded="false" aria-controls="kritik">
                 <i class="mdi mdi-comment-processing-outline menu-icon"></i>
@@ -69,31 +72,34 @@
             </a>
             <div class="collapse" id="kritik">
                 <ul class="nav flex-column sub-menu">
-                    @if (Auth::check() && Auth::user()->role === 'admin')
-                        <li class="nav-item"><a class="nav-link" href="/kritik/admin">Kritik dan Saran</a></li>
-                    @else
-                        <li class="nav-item"><a class="nav-link" href="/kritik/user">Kritik dan Saran</a></li>
-                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/kritik/admin' : '/kritik/user' }}">
+                            Kritik dan Saran
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#Pemenang" aria-expanded="false" aria-controls="Pemenang">
-                <i class="icon-contract menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#pemenang" aria-expanded="false" aria-controls="pemenang">
+                <i class="mdi mdi-crown menu-icon"></i>
                 <span class="menu-title">Pemenang</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="Pemenang">
+            <div class="collapse" id="pemenang">
                 <ul class="nav flex-column sub-menu">
-                    @if (Auth::check() && Auth::user()->role === 'admin')
-                        <li class="nav-item"><a class="nav-link" href="/champs">Pemenang</a></li>
-                    @else
-                        <li class="nav-item"><a class="nav-link" href="/champs/user">Pemenang</a></li>
-                    @endif
-
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/champs' : '/champs/user' }}">
+                            Pemenang
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <i class="icon-grid-2 menu-icon"></i>
@@ -106,18 +112,24 @@
                 </ul>
             </div>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#pemenang" aria-expanded="false" aria-controls="pemenang">
-                <i class="mdi mdi-trophy menu-icon"></i>
-                <span class="menu-title">Pemenang</span>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#game" aria-expanded="false" aria-controls="game">
+                <i class="icon-contract menu-icon"></i>
+                <span class="menu-title">Game</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="pemenang">
+            <div class="collapse" id="game">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="/champs/admin">Pemenang</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? route('games.create') : route('games.indexUser') }}">
+                            Game
+                        </a>
+                    </li>
                 </ul>
             </div>
-        </li> --}}
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
@@ -131,6 +143,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                 <i class="icon-head menu-icon"></i>
@@ -144,6 +157,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
                 <i class="icon-ban menu-icon"></i>
@@ -157,6 +171,7 @@
                 </ul>
             </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" href="https://github.com/M-Hidayatullah" target="_blank">
                 <i class="icon-paper menu-icon"></i>

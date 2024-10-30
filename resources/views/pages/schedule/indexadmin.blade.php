@@ -101,6 +101,8 @@
                                             <td>
                                                 <a href="{{ route('pages.schedule.edit', $schedule->id_schedule) }}"
                                                     class="btn btn-sm btn-warning">Edit</a>
+                                                <a href="{{ route('games.index') }}"
+                                                    class="btn btn-sm btn-done">Hasil</a>
                                                 <form
                                                     action="{{ route('pages.schedule.destroy', $schedule->id_schedule) }}"
                                                     method="POST" style="display:inline;">
