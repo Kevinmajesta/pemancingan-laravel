@@ -96,6 +96,12 @@
                             Pemenang
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/game/best-customer' : '/game/best-customer' }}">
+                            Pemenang AHP
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
