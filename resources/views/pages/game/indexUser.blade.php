@@ -8,10 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Riwayat Lomba Kolam Pemancingan</h4>
 
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-
+                        
                         <!-- Button to trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scheduleModal">
                             Pilih Jadwal

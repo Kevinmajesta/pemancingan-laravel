@@ -20,26 +20,15 @@
                 </ul>
             </div>
         </li>
+
+
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                aria-controls="form-elements">
-                <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">Form Elements</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="/forms">Basic Elements</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#schedule" aria-expanded="false" aria-controls="schedule">
-                <i class="mdi mdi-table-large menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+                <i class="icon-contract menu-icon"></i>
                 <span class="menu-title">Schedule</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="schedule">
+            <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link"
@@ -50,20 +39,7 @@
                 </ul>
             </div>
         </li>
-
-        {{-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                <i class="icon-bar-graph menu-icon"></i>
-                <span class="menu-title">Charts</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="/chart">ChartJs</a></li>
-                </ul>
-            </div>
-        </li> --}}
-
+{{-- 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#kritik" aria-expanded="false" aria-controls="kritik">
                 <i class="mdi mdi-comment-processing-outline menu-icon"></i>
@@ -80,9 +56,29 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#kritik" aria-expanded="false" aria-controls="kritik">
+                <i class="icon-grid-2 menu-icon"></i>
+                <span class="menu-title">kritik</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="kritik">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/kritik/admin' : '/kritik/user' }}">
+                            Kritik dan Saran
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+
+        {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#pemenang" aria-expanded="false" aria-controls="pemenang">
                 <i class="mdi mdi-crown menu-icon"></i>
                 <span class="menu-title">Pemenang</span>
@@ -104,17 +100,22 @@
                     </li>
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <i class="icon-grid-2 menu-icon"></i>
-                <span class="menu-title">Tables</span>
+                <span class="menu-title">Pemenang</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="/table">Basic Table</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/game/best-customer' : '/game/best-customer' }}">
+                            Pemenang AHP
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -133,19 +134,6 @@
                             Game
                         </a>
                     </li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                <i class="icon-contract menu-icon"></i>
-                <span class="menu-title">Icons</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="/icons">Mdi Icons</a></li>
                 </ul>
             </div>
         </li>

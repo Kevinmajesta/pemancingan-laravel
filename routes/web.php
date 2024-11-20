@@ -104,13 +104,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/schedule/admin', [ScheduleController::class, 'indexAdmin'])->name('pages.schedule.indexAdmin');
     });
 
-
+    Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
     // Rute untuk user
     Route::middleware(['role:user'])->group(function () {
         Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
         Route::get('/schedule/user', [ScheduleController::class, 'indexUser'])->name('pages.schedule.indexUser');
-        Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
     });
 
 
