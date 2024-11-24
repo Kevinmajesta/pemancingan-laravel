@@ -94,8 +94,9 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-8 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <div class="brand-logo">
-                                <img src="{{ asset('assets/images/logo.svg') }}" alt="logo">
+                            <div style="margin-bottom: 10px; text-align: center;">
+                                <img src="{{ asset('assets/images/dashboard/_9DEF9ABB-4ED2-4277-B842-E808062D0538_-removebg-preview.png') }}"
+                                    alt="logo" width="80" height="auto">
                             </div>
                             <h4>New here?</h4>
                             <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>

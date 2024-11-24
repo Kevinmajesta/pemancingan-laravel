@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
+    
     // Rute untuk user
     Route::middleware(['role:user'])->group(function () {
         Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');

@@ -1,8 +1,16 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href=""><img src="{{ asset('assets/images/dashboard/WhatsApp_Image_2024-08-30_at_22.12.44_86ff5f2a-removebg-preview.png') }}"
-            class="mr-2" alt="logo" style="width: 55px; height: auto;"/></a>
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start"
+        style="background-color: #f8f9fa; padding: 10px 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <a class="navbar-brand brand-logo d-flex align-items-center text-decoration-none" href="">
+            <img src="{{ asset('assets/images/dashboard/_9DEF9ABB-4ED2-4277-B842-E808062D0538_-removebg-preview.png') }}"
+                class="mr-3" alt="logo" style="width: 50px; height: auto; border-radius: 50%;" />
+            <span class="brand-text font-weight-bold"
+                style="font-size: 1.5rem; color: #4B49AC; font-family: 'Poppins', sans-serif;">R&Y Fishing</span>
+        </a>
     </div>
+
+
+
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">
