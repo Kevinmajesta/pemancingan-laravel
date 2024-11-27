@@ -50,10 +50,7 @@
                             <div class="card-body">
                                 <p class="mb-4">Pemenang Bulan Kemarin</p>
                                 <p class="fs-30 mb-2">
-                                    {{ $winnerLastMonth ? $winnerLastMonth->user->name : 'Belum ada pemenang' }}
-                                </p>
-                                <p>
-                                    {{ $winnerLastMonth ? 'Berat: ' . $winnerLastMonth->weight . ' kg' : '' }}
+                                    {{ $winnerLastMonth ? $winnerLastMonth->user->nickname : 'Belum ada pemenang' }}
                                 </p>
                             </div>
                         </div>
@@ -64,7 +61,7 @@
                             <div class="card-body">
                                 <p class="mb-4">Total Schedules</p>
                                 <p class="fs-30 mb-2">{{ $schedules->count() }}</p>
-                                <p>Jadwal Mendatang</p>
+                                <p>Total Jadwal</p>
                             </div>
                         </div>
                     </div>
@@ -106,7 +103,9 @@
                             <p class="card-title">Informasi</p>
 
                         </div>
-                        <p class="font-weight-500">No Information Yet.</p>
+                        <p class="font-weight-500">Biaya Registrasi : 120.000</p>
+                        <p class="font-weight-500">Hadiah untuk menjadi pelanggan terbaik bulanan adalah diskon 50% untuk pendaftaran selanjutnya.</p>
+                        <p class="font-weight-500">CS Admin : <a href="https://wa.me//6285248166669" target="_blank">Klik disini</a></p>
                     </div>
                 </div>
             </div>

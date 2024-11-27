@@ -50,7 +50,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Nama User</th>
+                                            <th>Nickname</th>
                                             <th>Ikan Terberat Sesi 1</th>
                                             <th>Ikan Terberat Sesi 2</th>
                                             <th>Ikan Terbanyak</th>
@@ -60,7 +60,7 @@
                                     <tbody>
                                         @foreach ($scheduleDetails as $scheduleDetail)
                                             <tr>
-                                                <td>{{ optional($scheduleDetail->user)->name ?? 'N/A' }}</td>
+                                                <td>{{ optional($scheduleDetail->user)->nickname ?? 'N/A' }}</td>
                                                 <td>{{ optional($scheduleDetail->game)->ikanterberat_sesi1 }}</td>
                                                 <td>{{ optional($scheduleDetail->game)->ikanterberat_sesi2 }}</td>
                                                 <td>{{ optional($scheduleDetail->game)->ikanterbanyak }}</td>

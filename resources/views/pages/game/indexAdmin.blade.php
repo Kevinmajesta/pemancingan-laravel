@@ -20,9 +20,9 @@
                                     onchange="this.form.submit()">
                                     <option value="">-- Pilih Jadwal --</option>
                                     @foreach ($schedules as $schedule)
-                                        <option value="{{ $schedule->id_schedule }}"
-                                            {{ $selectedSchedule == $schedule->id_schedule ? 'selected' : '' }}>
-                                            {{ $schedule->activity_name }}</option>
+                                        <option value="{{ $schedule->id_schedule }}">
+                                            {{ $schedule->activity_name }} -
+                                            {{ date('d-m-Y', strtotime($schedule->date)) }}</option>
                                     @endforeach
                                 </select>
                             </div>

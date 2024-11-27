@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Schedule;
-use App\Models\Champs;
+use App\Models\Game;
+use Illuminate\Http\Request;
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use App\Models\Schedule;
+use App\Models\Game;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,25 +21,31 @@ class DashboardController extends Controller
         // Total pengguna
         $totalUsers = User::count();
 
-        // Schedules aktif (misalnya berdasarkan tanggal mendatang)
-        $schedules = Schedule::where('date', '<=', now())->get();
+        // Jadwal yang sudah lewat
+        $schedules = Schedule::where('date', '<', now())->get(); // Jadwal yang sudah lewat
 
         // Total jumlah schedule
-        $totalSchedules = Schedule::count();  // Menambahkan query untuk total jadwal
+        $totalSchedules = Schedule::count();
 
-        // Pemenang bulan kemarin
-        $lastMonth = now()->subMonth();
-        $winnerLastMonth = Champs::whereYear('date', $lastMonth->year)
-            ->whereMonth('date', $lastMonth->month)
-            ->orderBy('weight', 'desc') // Utamakan berat tertinggi
-            ->first();
+        // Pemenang dari jadwal yang sudah lewat
+        $winnerLastMonth = null;
+        $latestSchedule = Schedule::where('date', '<', now()) // Jadwal yang sudah lewat
+                                 ->orderBy('date', 'desc') // Jadwal terbaru
+                                 ->first();
+
+        if ($latestSchedule) {
+            $winnerLastMonth = Game::where('id_schedule', $latestSchedule->id_schedule)
+                ->where('pemenang', '1') // Ambil pemenang 1 saja
+                ->first();
+        }
 
         // Kirim data ke view
         return view('dashboard.index', [
             'totalUsers' => $totalUsers,
             'schedules' => $schedules,
-            'totalSchedules' => $totalSchedules,  // Kirim total jadwal ke view
+            'totalSchedules' => $totalSchedules,
             'winnerLastMonth' => $winnerLastMonth,
         ]);
     }
 }
+

@@ -15,7 +15,7 @@ class ScheduleController extends Controller
     public function indexAdmin(Request $request)
     {
         $sortField = $request->input('sort', 'activity_name');
-        $sortDirection = $request->input('direction', 'asc');
+        $sortDirection = $request->input('direction', 'desc');
 
         $schedules = Schedule::orderBy($sortField, $sortDirection)->paginate(10);
         return view('pages.schedule.indexAdmin', compact('schedules', 'sortField', 'sortDirection'));
@@ -71,6 +71,7 @@ class ScheduleController extends Controller
             'maxqty' => 'required|integer',
         ]);
 
+        // Cukup membuat data tanpa menyertakan id_schedule
         Schedule::create([
             'activity_name' => $request->activity_name,
             'date' => $request->date,
@@ -80,6 +81,10 @@ class ScheduleController extends Controller
 
         return redirect()->route('pages.schedule.indexAdmin')->with('success', 'Jadwal berhasil ditambahkan');
     }
+
+
+
+
 
     // Display the specified schedule
     public function show(Schedule $schedule)
