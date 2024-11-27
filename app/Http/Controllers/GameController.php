@@ -35,20 +35,20 @@ class GameController extends Controller
     public function indexUser(Request $request)
     {
         $selectedSchedule = $request->input('id_schedule'); // Ambil parameter id_schedule
-    
+
         $schedules = Schedule::all();
         $scheduleDetails = [];
-    
+
         // Jika ada id_schedule yang dipilih, baru ambil data ScheduleDetail
         if ($selectedSchedule) {
             $scheduleDetails = ScheduleDetail::with(['user', 'game'])
                 ->where('id_schedule', $selectedSchedule) // Filter berdasarkan jadwal yang dipilih
                 ->get();
         }
-    
+
         return view('pages.game.indexUser', compact('schedules', 'selectedSchedule', 'scheduleDetails'));
     }
-    
+
 
     public function store(Request $request)
     {
@@ -88,11 +88,14 @@ class GameController extends Controller
 
     public function bestCustomerAHP(Request $request)
     {
-        // Get the month from the request, default to the current month if not provided
+        // Get the month and year from the request, default to the current month and year if not provided
         $month = $request->input('month', date('n'));
+        $year = $request->input('year', date('Y'));
 
-        // Retrieve games for the specified month
-        $games = Game::whereMonth('date', $month)->get();
+        // Retrieve games for the specified month and year
+        $games = Game::whereMonth('date', $month)
+            ->whereYear('date', $year)
+            ->get();
 
         if ($games->isEmpty()) {
             return view('pages.game.bestCustomer', [

@@ -20,14 +20,15 @@
                         <div class="weather-info">
                             <div class="d-flex">
                                 <div>
-                                    <h2 class="mb-1 font-weight-normal"><i class="icon-location mr-2"></i></h2> <!-- Ganti dengan ikon peta -->
-                                </div>                                
+                                    <h2 class="mb-1 font-weight-normal"><i class="icon-location mr-2"></i></h2>
+                                    <!-- Ganti dengan ikon peta -->
+                                </div>
                                 <div class="ml-2">
                                     <h4 class="location font-weight-normal">Kuala Kapuas</h4>
                                     <h6 class="font-weight-normal">Kalimantan Tengah</h6>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -44,34 +45,40 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6 mb-4 stretch-card transparent">
+                        <div class="card card-dark-blue">
+                            <div class="card-body">
+                                <p class="mb-4">Pemenang Bulan Kemarin</p>
+                                <p class="fs-30 mb-2">
+                                    {{ $winnerLastMonth ? $winnerLastMonth->user->name : 'Belum ada pemenang' }}
+                                </p>
+                                <p>
+                                    {{ $winnerLastMonth ? 'Berat: ' . $winnerLastMonth->weight . ' kg' : '' }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4 stretch-card transparent">
+                        <div class="card card-tale">
+                            <div class="card-body">
+                                <p class="mb-4">Total Schedules</p>
+                                <p class="fs-30 mb-2">{{ $schedules->count() }}</p>
+                                <p>Jadwal Mendatang</p>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-md-6 mb-4 stretch-card transparent">
                         <div class="card card-dark-blue">
                             <div class="card-body">
-                                <p class="mb-4">Total Games</p>
-                                <p class="fs-30 mb-2">61344</p>
-                                <p>22.00% (30 days)</p>
+                                <p class="mb-4">Total Users</p>
+                                <p class="fs-30 mb-2">{{ $totalUsers }}</p>
+                                <p>Total Pengguna</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4 stretch-card transparent">
-                        <div class="card card-tale">
-                            <div class="card-body">
-                                <p class="mb-4">Schedules</p>
-                                <p class="fs-30 mb-2">61344</p>
-                                <p>22.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4 stretch-card transparent">
-                        <div class="card card-dark-blue">
-                            <div class="card-body">
-                                <p class="mb-4">Total Games</p>
-                                <p class="fs-30 mb-2">61344</p>
-                                <p>22.00% (30 days)</p>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

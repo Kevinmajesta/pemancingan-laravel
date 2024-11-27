@@ -20,13 +20,25 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="year">Pilih Tahun:</label>
+                                <select name="year" id="year" class="form-control">
+                                    @foreach (range(date('Y') - 2, date('Y') + 2) as $year)
+                                        <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>
+                                            {{ $year }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Tampilkan</button>
                         </form>
 
                         @if (isset($message))
-                            <p>{{ $message }}</p>
+                            <p class="mt-4">{{ $message }}</p>
                         @else
-                            <h5>Pelanggan Terbaik: {{ $bestCustomer->nickname ?? 'Unknown User' }}</h5>
+                            <h5 class="mt-4">Pelanggan Terbaik: {{ $bestCustomer->nickname ?? 'Unknown User' }}</h5>
                             <p>Skor AHP: {{ number_format($userScores[$bestCustomer->id] ?? 0, 2) }}</p>
 
                             <div class="table-responsive mt-4">
@@ -54,6 +66,7 @@
         </div>
     </div>
 @endsection
+
 
 {{-- 
 @extends('layouts.main')

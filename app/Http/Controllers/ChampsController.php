@@ -59,7 +59,7 @@ class ChampsController extends Controller
             'weight' => $request->input('weight'),
         ]);
 
-        return redirect()->route('pages.champs.indexAdminChamps')->with('success', 'Winner has been selected successfully.');
+        return redirect()->route('pages.champs.indexAdmin')->with('success', 'Winner has been selected successfully.');
     }
 }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChampsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KritikController;
 use App\Http\Controllers\ScheduleController;
@@ -21,50 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Rute publik
-Route::get('/', function () {
-    return view('dashboard.index');
-});
-
-Route::get('/forms', function () {
-    return view('pages.forms.index');
-});
-
-Route::get('/buttons', function () {
-    return view('pages.ui-features.buttons.index');
-});
-
-Route::get('/dropdowns', function () {
-    return view('pages.ui-features.dropdowns.index');
-});
-
-Route::get('/typography', function () {
-    return view('pages.ui-features.typography.index');
-});
-
-Route::get('/chart', function () {
-    return view('pages.chart.index');
-});
-
-Route::get('/table', function () {
-    return view('pages.table.index');
-});
-
-Route::get('/icons', function () {
-    return view('pages.icons.index');
-});
-
-Route::get('/erro404', function () {
-    return view('pages.error-pages.404.index');
-});
-
-Route::get('/erro500', function () {
-    return view('pages.error-pages.500.index');
-});
-
-// Rute dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard.index');
 
 // Rute profil
 Route::middleware('auth')->group(function () {
@@ -112,6 +70,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
         Route::get('/schedule/user', [ScheduleController::class, 'indexUser'])->name('pages.schedule.indexUser');
     });
+
+    
 
 
     Route::resource('games', GameController::class);

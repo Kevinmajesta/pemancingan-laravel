@@ -74,9 +74,6 @@
                                 <img src="{{ asset('assets/images/dashboard/_9DEF9ABB-4ED2-4277-B842-E808062D0538_-removebg-preview.png') }}"
                                     alt="logo" width="80" height="auto">
                             </div>
-
-
-
                             <h4>Hello! let's get started</h4>
                             <h6 class="font-weight-light">Sign in to continue.</h6>
 
