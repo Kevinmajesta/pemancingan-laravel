@@ -69,22 +69,22 @@ class ScheduleController extends Controller
             'date' => 'required|date',
             'time' => 'required',
             'maxqty' => 'required|integer',
+            'private_event' => 'nullable|boolean',  // Make sure it's nullable in validation
         ]);
+
+        // If it's a private event, force maxqty to 1
+        $maxqty = $request->private_event ? 1 : $request->maxqty;
 
         // Cukup membuat data tanpa menyertakan id_schedule
         Schedule::create([
             'activity_name' => $request->activity_name,
             'date' => $request->date,
             'time' => $request->time,
-            'maxqty' => $request->maxqty,
+            'maxqty' => $maxqty,
         ]);
 
         return redirect()->route('pages.schedule.indexAdmin')->with('success', 'Jadwal berhasil ditambahkan');
     }
-
-
-
-
 
     // Display the specified schedule
     public function show(Schedule $schedule)

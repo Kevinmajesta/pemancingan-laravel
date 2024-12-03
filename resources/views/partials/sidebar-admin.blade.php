@@ -1,5 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
+        <!-- Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="/">
                 <i class="icon-grid menu-icon"></i>
@@ -7,78 +8,73 @@
             </a>
         </li>
 
+        <!-- Schedule -->
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+            <a class="nav-link" data-toggle="collapse" href="#scheduleMenu" aria-controls="scheduleMenu">
                 <i class="mdi mdi-calendar menu-icon"></i>
                 <span class="menu-title">Schedule</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="icons">
+            <div class="collapse" id="scheduleMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/schedule/admin' : '/schedule/user' }}">
+                        <span class="nav-link" style="cursor: pointer;" onclick="window.location='/schedule/admin'">
                             Schedule
-                        </a>
+                        </span>
                     </li>
                 </ul>
             </div>
         </li>
+
+        <!-- Kritik dan Saran -->
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#kritik" aria-expanded="false" aria-controls="kritik">
+            <a class="nav-link" data-toggle="collapse" href="#kritikMenu" aria-controls="kritikMenu">
                 <i class="mdi mdi-comment-text menu-icon"></i>
                 <span class="menu-title">Kritik</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="kritik">
+            <div class="collapse" id="kritikMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/kritik/admin' : '/kritik/user' }}">
+                        <span class="nav-link" style="cursor: pointer;" onclick="window.location='/kritik/admin'">
                             Kritik dan Saran
-                        </a>
+                        </span>
                     </li>
                 </ul>
             </div>
         </li>
 
+        <!-- Pemenang -->
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+            <a class="nav-link" data-toggle="collapse" href="#pemenangMenu" aria-controls="pemenangMenu">
                 <i class="mdi mdi-crown menu-icon"></i>
                 <span class="menu-title">Pemenang</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="tables">
+            <div class="collapse" id="pemenangMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/game/best-customer' : '/game/best-customer' }}">
-                            Pelanggan Terbaik 
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? '/champs' : '/champs/user' }}">
-                            Pemenang 
-                        </a>
+                        <span class="nav-link" style="cursor: pointer;" onclick="window.location='/game/best-customer'">
+                            Pelanggan Terbaik
+                        </span>
                     </li>
                 </ul>
             </div>
         </li>
 
+        <!-- Game -->
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#game" aria-expanded="false" aria-controls="game">
+            <a class="nav-link" data-toggle="collapse" href="#gameMenu" aria-controls="gameMenu">
                 <i class="mdi mdi-gamepad-variant menu-icon"></i>
                 <span class="menu-title">Game</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="game">
+            <div class="collapse" id="gameMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ Auth::check() && Auth::user()->role === 'admin' ? route('games.indexUser') : route('games.indexUser') }}">
+                        <span class="nav-link" style="cursor: pointer;" onclick="window.location='{{ route('games.indexUser') }}'">
                             Game
-                        </a>
+                        </span>
                     </li>
                 </ul>
             </div>

@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Riwayat Lomba Kolam Pemancingan</h4>
 
-                        
+
                         <!-- Button to trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scheduleModal">
                             Pilih Jadwal
@@ -71,7 +71,7 @@
                                 </table>
                             </div>
                         @else
-                            <div class="alert alert-warning">Tidak ada data riwayat lomba.</div>
+                            <div class="alert alert-warning mt-3">Tidak ada data riwayat lomba.</div
                         @endif
                     </div>
                 </div>

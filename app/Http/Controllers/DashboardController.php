@@ -7,13 +7,6 @@ use App\Models\Schedule;
 use App\Models\Game;
 use Illuminate\Http\Request;
 
-namespace App\Http\Controllers;
-
-use App\Models\User;
-use App\Models\Schedule;
-use App\Models\Game;
-use Illuminate\Http\Request;
-
 class DashboardController extends Controller
 {
     public function dashboard()

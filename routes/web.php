@@ -11,14 +11,14 @@ use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|----------------------------------------------------------------------
-| Web Routes
-|----------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+|---------------------------------------------------------------------- 
+| Web Routes 
+|---------------------------------------------------------------------- 
+| 
+| Here is where you can register web routes for your application. These 
+| routes are loaded by the RouteServiceProvider and all of them will 
+| be assigned to the "web" middleware group. Make something great! 
+| 
 */
 
 // Rute publik
@@ -30,14 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
-
     // Route to show the schedule details and registration form
     Route::get('/schedule/{id_schedule}/details', [ScheduleDetailController::class, 'index'])->name('pages.schedule.daftarschedule.indexUser');
 
     // Route to handle registration submission
     Route::post('/schedule/register', [ScheduleDetailController::class, 'store'])->name('schedule_detail.store');
-
 
     // Rute kritik
     Route::get('/kritik/create', [KritikController::class, 'create'])->name('pages.kritikdansaran.create');
@@ -49,31 +46,28 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/game/best-customer', [GameController::class, 'bestCustomerAHP'])->name('pages.game.bestCustomer');
 
-    //Rute schedule
+    // Rute schedule
     Route::get('create', [ScheduleController::class, 'create'])->name('pages.schedule.create');
     Route::post('store', [ScheduleController::class, 'store'])->name('pages.schedule.store');
     Route::get('{schedule}/edit', [ScheduleController::class, 'edit'])->name('pages.schedule.edit');
     Route::put('{schedule}', [ScheduleController::class, 'update'])->name('pages.schedule.update');
     Route::delete('{schedule}', [ScheduleController::class, 'destroy'])->name('pages.schedule.destroy');
 
+    // Admin Routes
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/kritik/admin', [KritikController::class, 'indexAdmin'])->name('pages.kritik.indexAdmin');
         Route::get('/champs', [ChampsController::class, 'indexAdminChamps'])->name('pages.champs.indexAdmin');
         Route::get('/schedule/admin', [ScheduleController::class, 'indexAdmin'])->name('pages.schedule.indexAdmin');
+        Route::get('/kritik/admin', [KritikController::class, 'indexAdmin'])->name('pages.kritik.indexAdmin');
     });
 
-    Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
-    
-    // Rute untuk user
+    // User Routes
     Route::middleware(['role:user'])->group(function () {
-        Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
         Route::get('/champs/user', [ChampsController::class, 'indexUserChamps'])->name('pages.champs.indexUser');
         Route::get('/schedule/user', [ScheduleController::class, 'indexUser'])->name('pages.schedule.indexUser');
+        Route::get('/kritik/user', [KritikController::class, 'indexUser'])->name('pages.kritik.indexUser');
+        Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
     });
-
-    
-
-
+    Route::get('/games/user', [GameController::class, 'indexUser'])->name('games.indexUser');
     Route::resource('games', GameController::class);
 });
 

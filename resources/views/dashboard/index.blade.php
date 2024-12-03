@@ -48,7 +48,7 @@
                     <div class="col-md-6 mb-4 stretch-card transparent">
                         <div class="card card-dark-blue">
                             <div class="card-body">
-                                <p class="mb-4">Pemenang Bulan Kemarin</p>
+                                <p class="mb-4">Pemenang Terbaru</p>
                                 <p class="fs-30 mb-2">
                                     {{ $winnerLastMonth ? $winnerLastMonth->user->nickname : 'Belum ada pemenang' }}
                                 </p>
@@ -104,8 +104,10 @@
 
                         </div>
                         <p class="font-weight-500">Biaya Registrasi : 120.000</p>
-                        <p class="font-weight-500">Hadiah untuk menjadi pelanggan terbaik bulanan adalah diskon 50% untuk pendaftaran selanjutnya.</p>
-                        <p class="font-weight-500">CS Admin : <a href="https://wa.me//6285248166669" target="_blank">Klik disini</a></p>
+                        <p class="font-weight-500">Hadiah untuk menjadi pelanggan terbaik bulanan adalah diskon 50% untuk
+                            pendaftaran selanjutnya.</p>
+                        <p class="font-weight-500">CS Admin : <a href="https://wa.me//6285248166669" target="_blank">Klik
+                                disini</a></p>
                     </div>
                 </div>
             </div>
@@ -134,9 +136,9 @@
                                         <!-- Tulisan -->
                                         <div class="col-md-4 d-flex align-items-center">
                                             <div>
-                                                <h3 class="text-primary">Informasi Gambar</h3>
-                                                <p class="mb-2">Ini adalah deskripsi untuk gambar pertama. Anda dapat
-                                                    menambahkan teks yang relevan di sini sesuai kebutuhan.</p>
+                                                <h3 class="text-primary">Alamat Lengkap</h3>
+                                                <p class="mb-2">Kolam ini terletak di Jl. Pemuda Gg. Alif Putih, Selat
+                                                    Utara, Kec. Selat, Kabupaten Kapuas, Kalimantan Tengah 73581</p>
                                             </div>
                                         </div>
                                     </div>
@@ -158,9 +160,9 @@
                                         <!-- Tulisan -->
                                         <div class="col-md-4 d-flex align-items-center">
                                             <div>
-                                                <h3 class="text-primary">Informasi Gambar</h3>
-                                                <p class="mb-2">Ini adalah deskripsi untuk gambar kedua. Anda dapat
-                                                    menambahkan teks yang relevan di sini sesuai kebutuhan.</p>
+                                                <h3 class="text-primary">Alamat Lengkap</h3>
+                                                <p class="mb-2">Kolam ini terletak di Jl. Pemuda Gg. Alif Putih, Selat
+                                                    Utara, Kec. Selat, Kabupaten Kapuas, Kalimantan Tengah 73581</p>
                                             </div>
                                         </div>
                                     </div>

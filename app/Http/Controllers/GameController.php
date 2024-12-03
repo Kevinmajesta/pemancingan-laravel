@@ -17,7 +17,7 @@ class GameController extends Controller
         $selectedSchedule = $request->input('id_schedule'); // Ambil parameter id_schedule
 
         // Ambil semua jadwal dengan urutan ascending berdasarkan tanggal
-        $schedules = Schedule::orderBy('date', 'asc')->get();
+        $schedules = Schedule::orderBy('date', 'desc')->get();
 
         $scheduleDetails = [];
 
@@ -37,7 +37,7 @@ class GameController extends Controller
         $selectedSchedule = $request->input('id_schedule'); // Ambil parameter id_schedule
 
         // Ambil semua jadwal dengan urutan ascending berdasarkan tanggal
-        $schedules = Schedule::orderBy('date', 'asc')->get();
+        $schedules = Schedule::orderBy('date', 'desc')->get();
 
         $scheduleDetails = [];
 
