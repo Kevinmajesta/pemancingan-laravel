@@ -14,18 +14,19 @@ class ScheduleController extends Controller
     // Display schedules for admin
     public function indexAdmin(Request $request)
     {
-        $sortField = $request->input('sort', 'activity_name');
-        $sortDirection = $request->input('direction', 'desc');
+        $sortField = $request->input('sort', 'date'); // Default ke 'date'
+        $sortDirection = $request->input('direction', 'desc'); // Default ke 'desc'
 
         $schedules = Schedule::orderBy($sortField, $sortDirection)->paginate(10);
         return view('pages.schedule.indexAdmin', compact('schedules', 'sortField', 'sortDirection'));
     }
 
 
+
     public function indexUser(Request $request)
     {
-        $sortField = $request->input('sort', 'activity_name');
-        $sortDirection = $request->input('direction', 'asc');
+        $sortField = $request->input('sort', 'date');
+        $sortDirection = $request->input('direction', 'desc');
 
         $schedules = Schedule::withCount('scheduleDetails')
             ->orderBy($sortField, $sortDirection)

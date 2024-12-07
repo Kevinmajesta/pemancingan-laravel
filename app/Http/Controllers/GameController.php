@@ -14,17 +14,15 @@ class GameController extends Controller
 {
     public function index(Request $request)
     {
-        $selectedSchedule = $request->input('id_schedule'); // Ambil parameter id_schedule
+        $selectedSchedule = $request->input('id_schedule'); 
 
-        // Ambil semua jadwal dengan urutan ascending berdasarkan tanggal
         $schedules = Schedule::orderBy('date', 'desc')->get();
 
         $scheduleDetails = [];
 
-        // Jika ada id_schedule yang dipilih, baru ambil data ScheduleDetail
         if ($selectedSchedule) {
             $scheduleDetails = ScheduleDetail::with(['user', 'game'])
-                ->where('id_schedule', $selectedSchedule) // Filter berdasarkan jadwal yang dipilih
+                ->where('id_schedule', $selectedSchedule) 
                 ->get();
         }
 
@@ -34,17 +32,15 @@ class GameController extends Controller
 
     public function indexUser(Request $request)
     {
-        $selectedSchedule = $request->input('id_schedule'); // Ambil parameter id_schedule
+        $selectedSchedule = $request->input('id_schedule'); 
 
-        // Ambil semua jadwal dengan urutan ascending berdasarkan tanggal
         $schedules = Schedule::orderBy('date', 'desc')->get();
 
         $scheduleDetails = [];
 
-        // Jika ada id_schedule yang dipilih, baru ambil data ScheduleDetail
         if ($selectedSchedule) {
             $scheduleDetails = ScheduleDetail::with(['user', 'game'])
-                ->where('id_schedule', $selectedSchedule) // Filter berdasarkan jadwal yang dipilih
+                ->where('id_schedule', $selectedSchedule)
                 ->get();
         }
 
@@ -114,7 +110,7 @@ class GameController extends Controller
             $userId = $game->id_user;
             if (!isset($criteriaData[$userId])) {
                 $criteriaData[$userId] = [
-                    'jumlah_berat' => 5,
+                    'jumlah_berat' => 0,
                     'jumlah_ikan' => 0,
                     'jumlah_lomba' => 0,
                 ];

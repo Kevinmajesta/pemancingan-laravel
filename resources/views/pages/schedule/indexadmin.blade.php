@@ -20,7 +20,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group">
                                 <label for="maxqty">Max Qty</label>
                                 <input type="number" name="maxqty" id="maxqty" class="form-control" required>
@@ -28,14 +28,14 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <!-- Private Event Radio Button -->
                             <div class="form-group">
                                 <label for="private_event">Private</label>
-                                <input type="radio" name="private_event" id="private_event" value="1"> Yes
+                                <input type="radio" name="private_event" id="private_event" value="0"> Yes
                                 <input type="radio" name="private_event" id="private_event_no" value="0" checked> No
                             </div>
-                        
+
                             <div class="form-group">
                                 <label for="date">Tanggal</label>
                                 <input type="date" name="date" id="date" class="form-control" required>
@@ -43,7 +43,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group">
                                 <label for="time">Waktu</label>
                                 <input type="time" name="time" id="time" class="form-control" required>
@@ -51,7 +51,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <button type="submit" class="btn btn-primary">Tambah Jadwal</button>
                         </form>
 
@@ -85,6 +85,7 @@
                                                     @endif
                                                 @endif
                                             </a>
+
                                         </th>
 
                                         <th>
@@ -148,13 +149,13 @@
         // Set maxqty to 1 if Private Event is selected
         document.getElementById('private_event').addEventListener('change', function() {
             if (this.checked) {
-                document.getElementById('maxqty').value = 1;  // Set maxqty to 1 for private event
+                document.getElementById('maxqty').value = 0; // Set maxqty to 1 for private event
             }
         });
-    
+
         // Reset maxqty when "No" is selected
         document.getElementById('private_event_no').addEventListener('change', function() {
-            document.getElementById('maxqty').value = '';  // Clear maxqty field
+            document.getElementById('maxqty').value = ''; // Clear maxqty field
         });
     </script>
 

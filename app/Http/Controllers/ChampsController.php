@@ -9,7 +9,7 @@ class ChampsController extends Controller
 {
     public function indexAdminChamps(Request $request)
     {
-       
+       //sorting tanggal
         $sortField = $request->input('sort', 'date'); 
         $sortDirection = $request->input('direction', 'asc'); 
 

@@ -11,11 +11,10 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        // Total pengguna
         $totalUsers = User::count();
 
         // Jadwal yang sudah lewat
-        $schedules = Schedule::where('date', '<', now())->get(); // Jadwal yang sudah lewat
+        $schedules = Schedule::where('date', '<', now())->get();
 
         // Total jumlah schedule
         $totalSchedules = Schedule::count();
@@ -28,7 +27,7 @@ class DashboardController extends Controller
 
         if ($latestSchedule) {
             $winnerLastMonth = Game::where('id_schedule', $latestSchedule->id_schedule)
-                ->where('pemenang', '1') // Ambil pemenang 1 saja
+                ->where('pemenang', '1') 
                 ->first();
         }
 
