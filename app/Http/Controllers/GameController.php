@@ -14,7 +14,7 @@ class GameController extends Controller
 {
     public function index(Request $request)
     {
-        $selectedSchedule = $request->input('id_schedule'); 
+        $selectedSchedule = $request->input('id_schedule');
 
         $schedules = Schedule::orderBy('date', 'desc')->get();
 
@@ -22,7 +22,7 @@ class GameController extends Controller
 
         if ($selectedSchedule) {
             $scheduleDetails = ScheduleDetail::with(['user', 'game'])
-                ->where('id_schedule', $selectedSchedule) 
+                ->where('id_schedule', $selectedSchedule)
                 ->get();
         }
 
@@ -32,7 +32,7 @@ class GameController extends Controller
 
     public function indexUser(Request $request)
     {
-        $selectedSchedule = $request->input('id_schedule'); 
+        $selectedSchedule = $request->input('id_schedule');
 
         $schedules = Schedule::orderBy('date', 'desc')->get();
 
@@ -87,11 +87,10 @@ class GameController extends Controller
 
     public function bestCustomerAHP(Request $request)
     {
-        // Get the month and year from the request, default to the current month and year if not provided
+
         $month = $request->input('month', date('n'));
         $year = $request->input('year', date('Y'));
 
-        // Retrieve games for the specified month and year
         $games = Game::whereMonth('date', $month)
             ->whereYear('date', $year)
             ->get();
@@ -104,7 +103,7 @@ class GameController extends Controller
             ]);
         }
 
-        // Step 1: Prepare criteria data
+        //menyiapkan data kriteria
         $criteriaData = [];
         foreach ($games as $game) {
             $userId = $game->id_user;
@@ -121,24 +120,20 @@ class GameController extends Controller
             $criteriaData[$userId]['jumlah_lomba'] += 1;
         }
 
-        // Debug: Log criteria data
         Log::debug('Criteria Data:', $criteriaData);
 
-        // Step 2: Define the AHP matrices for the criteria
         $criteriaMatrix = [
             [1, 0.333, 0.2],
             [3, 1, 0.333],
             [5, 3, 1]
         ];
 
-        // Step 3: Normalize the criteria matrix
+        //normalisasi matrix dan menghitung prioritas
         $normalizedCriteriaMatrix = $this->normalizeMatrix($criteriaMatrix);
         $criteriaWeights = $this->calculatePriorityVector($normalizedCriteriaMatrix);
 
-        // Debug: Log criteria weights
         Log::debug('Criteria Weights:', $criteriaWeights);
 
-        // Define sub-criteria matrices for each main criterion
         $subCriteriaMatrices = [
             'jumlah_berat' => [
                 [1, 1 / 2, 1 / 3],
@@ -157,26 +152,30 @@ class GameController extends Controller
             ]
         ];
 
-        // Step 4: Calculate Sub-Criteria Weights
+        //normalisasi matrix dan menghitung prioritas
         $subCriteriaWeights = [];
         foreach ($subCriteriaMatrices as $key => $subMatrix) {
             $subCriteriaWeights[$key] = $this->calculateSubCriteriaWeights($subMatrix);
-
-            // Debug: Log sub-criteria weights
             Log::debug("Sub-Criteria Weights for $key:", $subCriteriaWeights[$key]);
         }
 
-        // Step 5: Calculate scores for each user
+        //hitung skor untuk setiap user
         $userScores = [];
         foreach ($criteriaData as $userId => $data) {
             $userScore = 0;
+            $userLog = [
+                'user_id' => $userId,
+                'criteria_values' => $data,
+                'criterion_scores' => [],
+                'total_score' => 0
+            ];
 
-            // Calculate score for each criterion
+            // hitung skor untuk setiap kriteria
             foreach (['jumlah_berat', 'jumlah_ikan', 'jumlah_lomba'] as $index => $criterion) {
                 $value = $data[$criterion];
                 $subWeights = $subCriteriaWeights[$criterion];
 
-                // Determine which index in the sub-criteria to use
+                // pilih sub index berdasarkan nilai kriteria
                 switch ($criterion) {
                     case 'jumlah_berat':
                         $subIndex = $this->getWeightIndex($value);
@@ -188,18 +187,31 @@ class GameController extends Controller
                         $subIndex = $this->getGamesPlayedIndex($value);
                         break;
                     default:
-                        $subIndex = 0; // Default index if no match
+                        $subIndex = 0;
                 }
 
-                // Aggregate the score for this criterion
-                $userScore += $criteriaWeights[$index] * $subWeights[$subIndex];
+                // ambil bobot kriteria dan sub kriteria
+                $criterionScore = $criteriaWeights[$index] * $subWeights[$subIndex];
+                $userScore += $criterionScore;
+
+                //user log cmn buat cek di laravel.log aja
+                $userLog['criterion_scores'][$criterion] = [
+                    'value' => $value,
+                    'sub_index' => $subIndex,
+                    'sub_weight' => $subWeights[$subIndex],
+                    'weight' => $criteriaWeights[$index],
+                    'score' => $criterionScore
+                ];
             }
 
-            // Store user score
+            // masukkan skor total ke dalam array
             $userScores[$userId] = number_format($userScore, 3, '.', '');
+            $userLog['total_score'] = $userScores[$userId];
+            Log::debug('User Calculation Details:', $userLog);
         }
 
-        // Step 6: Rank users based on scores
+
+        //rangking user 
         arsort($userScores);
         $bestCustomerId = key($userScores);
         $bestCustomer = User::find($bestCustomerId);
@@ -211,7 +223,7 @@ class GameController extends Controller
         ]);
     }
 
-
+    //MATRIKS NILAI KRITERIA
     private function normalizeMatrix($matrix)
     {
         $columnSums = array_fill(0, count($matrix[0]), 0);
@@ -232,7 +244,7 @@ class GameController extends Controller
 
         return $normalizedMatrix;
     }
-
+    //hitung bobot prioritas
     private function calculatePriorityVector($normalizedMatrix)
     {
         $priorityVector = [];
@@ -243,7 +255,7 @@ class GameController extends Controller
         return $priorityVector;
     }
 
-
+    //MATRIKS NILAI KRITERIA subkriteria
     private function calculateSubCriteriaWeights($subCriteriaMatrix)
     {
         // Step 1: Normalize the matrix
@@ -254,8 +266,6 @@ class GameController extends Controller
 
         return $priorityVector;
     }
-
-
 
     private function getWeightIndex($weight)
     {

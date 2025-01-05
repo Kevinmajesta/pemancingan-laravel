@@ -48,6 +48,9 @@
             @elseif(auth()->check() && auth()->user()->role === 'user')
                 <!-- User Sidebar -->
                 @include('partials.sidebar-user')
+            @else
+                <!-- Guest Sidebar -->
+                @include('partials.sidebar-user')
             @endif
             <div class="main-panel">
                 @yield('content')
