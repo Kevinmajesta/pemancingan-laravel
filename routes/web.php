@@ -45,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/champs/store', [ChampsController::class, 'store'])->name('pages.champs.store');
 
     Route::get('/game/best-customer', [GameController::class, 'bestCustomerAHP'])->name('pages.game.bestCustomer');
+    Route::get('/game/winners', [GameController::class, 'winners'])->name('pages.game.listCustomer');
+
+    Route::get('/winners', [GameController::class, 'list'])->name('winners.list');
 
     // Rute schedule
     Route::get('create', [ScheduleController::class, 'create'])->name('pages.schedule.create');

@@ -55,7 +55,12 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <span class="nav-link" style="cursor: pointer;" onclick="window.location='/game/best-customer'">
-                            Pelanggan Terbaik
+                            Skor Pelanggan Terbaik
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link" style="cursor: pointer;" onclick="window.location='/game/winners'">
+                            List Pelanggan Terbaik
                         </span>
                     </li>
                 </ul>
@@ -72,13 +77,14 @@
             <div class="collapse" id="gameMenu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <span class="nav-link" style="cursor: pointer;" onclick="window.location='{{ route('games.indexUser') }}'">
+                        <span class="nav-link" style="cursor: pointer;"
+                            onclick="window.location='{{ route('games.indexUser') }}'">
                             Game
                         </span>
                     </li>
                 </ul>
             </div>
         </li>
-        
+
     </ul>
 </nav>
